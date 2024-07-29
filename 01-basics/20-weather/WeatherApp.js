@@ -8,11 +8,9 @@ export default defineComponent({
     const weatherData = getWeatherData();
     const weatherIcon = WeatherConditionIcons;
 
-    console.log(weatherData)
-
     const temp = (value) => {
         const result = value - 273.15;
-        return result.toFixed(2)
+        return result.toFixed(1)
     }
 
     const pressure = (value) => {
@@ -33,7 +31,7 @@ export default defineComponent({
 
       <ul class="weather-list unstyled-list">
         <li v-for="city in weatherData" :key="city.geographic_name" class="weather-card" :class="(parseInt(city.current.sunrise) < parseInt(city.current.dt)) && (parseInt(city.current.dt) < parseInt(city.current.sunset)) ? '' : 'weather-card--night'">
-            <div class="weather-alert" v-if="city.alert">
+          <div class="weather-alert" v-if="city.alert">
             <span class="weather-alert__icon">⚠️</span>
             <span class="weather-alert__description">{{city.alert.sender_name}}️ : {{city.alert.description}}️</span>
           </div>
@@ -46,8 +44,8 @@ export default defineComponent({
             </div>
           </div>
           <div class="weather-conditions">
-            <div class="weather-conditions__icon" title="thunderstorm with heavy rain">{{weatherIcon[city.current.weather.id]}}</div>
-            <div class="weather-conditions__temp"> {{ temp(city.current.temp) }}°C</div>
+            <div class="weather-conditions__icon" :title="city.current.weather.description" >{{weatherIcon[city.current.weather.id]}}</div>
+            <div class="weather-conditions__temp"> {{ temp(city.current.temp) }} °C</div>
           </div>
           <div class="weather-details">
             <div class="weather-details__item">

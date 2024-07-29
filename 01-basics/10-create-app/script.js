@@ -5,12 +5,8 @@ const App = defineComponent({
 
   setup() {
 
-    function formatAsIsoDate(timestamp) {
-      return new Date(timestamp).toISOString()
-    }
-
-    function formatAsLocalDate(timestamp) {
-      return new Date(timestamp).toLocaleString(navigator.language, {
+    function formatAsLocalDate(time) {
+      return new Date().toLocaleString(navigator.language, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -18,13 +14,12 @@ const App = defineComponent({
     }
 
     return {
-      formatAsIsoDate,
-      formatAsLocalDate,
+      formatAsLocalDate
     }
   },
 
   template: `
-    <div class="container">Сегодня {{ new Date().toLocaleDateString('ru-RU') }}</div>
+    <div class="container">Сегодня {{formatAsLocalDate (new Date())}} </div>
    `,
 })
 
