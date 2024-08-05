@@ -13,13 +13,16 @@ const App = defineComponent({
       })
     }
 
+    const dateNow = formatAsLocalDate (new Date())
+
     return {
-      formatAsLocalDate
+      formatAsLocalDate,
+      dateNow
     }
   },
 
   template: `
-    <div class="container">Сегодня {{formatAsLocalDate (new Date())}} </div>
+    <div class="container">Сегодня {{ dateNow }} </div>
    `,
 })
 
